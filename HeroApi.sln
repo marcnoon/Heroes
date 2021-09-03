@@ -1,0 +1,81 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "HeroWeb", "HeroWeb\", "{5CCF2D0A-E8EC-4215-8BD1-98AC19D69380}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_3423"
+		Debug.AspNetCompiler.PhysicalPath = "HeroWeb\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_3423\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_3423"
+		Release.AspNetCompiler.PhysicalPath = "HeroWeb\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_3423\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "3423"
+		SlnRelativePath = "HeroWeb\"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orm", "Orm\Orm.csproj", "{78CB8B98-8950-46FD-83DA-FD716D9DB7D3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeroApi", "HeroApi\HeroApi.csproj", "{1ABA6CBC-41D5-4BEE-8E8A-2D3F76D829BC}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "web_dev", "HeroWeb\app\web_dev\", "{544F67E0-8574-4837-B932-DB7CCFCAC249}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_25462"
+		Debug.AspNetCompiler.PhysicalPath = "HeroWeb\app\web_dev\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_25462\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_25462"
+		Release.AspNetCompiler.PhysicalPath = "HeroWeb\app\web_dev\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_25462\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "25462"
+		SlnRelativePath = "HeroWeb\app\web_dev\"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5CCF2D0A-E8EC-4215-8BD1-98AC19D69380}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CCF2D0A-E8EC-4215-8BD1-98AC19D69380}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CCF2D0A-E8EC-4215-8BD1-98AC19D69380}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CCF2D0A-E8EC-4215-8BD1-98AC19D69380}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{78CB8B98-8950-46FD-83DA-FD716D9DB7D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78CB8B98-8950-46FD-83DA-FD716D9DB7D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78CB8B98-8950-46FD-83DA-FD716D9DB7D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78CB8B98-8950-46FD-83DA-FD716D9DB7D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ABA6CBC-41D5-4BEE-8E8A-2D3F76D829BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ABA6CBC-41D5-4BEE-8E8A-2D3F76D829BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ABA6CBC-41D5-4BEE-8E8A-2D3F76D829BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ABA6CBC-41D5-4BEE-8E8A-2D3F76D829BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{544F67E0-8574-4837-B932-DB7CCFCAC249}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{544F67E0-8574-4837-B932-DB7CCFCAC249}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{544F67E0-8574-4837-B932-DB7CCFCAC249}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{544F67E0-8574-4837-B932-DB7CCFCAC249}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B6670F41-B8B4-426B-9E12-C4E17D9B3B38}
+	EndGlobalSection
+EndGlobal

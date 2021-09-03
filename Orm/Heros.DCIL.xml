@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dcl:schema name="Heros" xmlns:dcl="http://schemas.orm.net/DIL/DCIL" xmlns:dil="http://schemas.orm.net/DIL/DIL" xmlns:ddt="http://schemas.orm.net/DIL/DILDT" xmlns:dep="http://schemas.orm.net/DIL/DILEP" xmlns:dml="http://schemas.orm.net/DIL/DMIL" xmlns:ddl="http://schemas.orm.net/DIL/DDIL">
+	<dcl:domain name="Gender">
+		<dcl:predefinedDataType name="CHARACTER" length="1" />
+		<dcl:checkConstraint name="ValueTypeValueConstraint1">
+			<dep:inPredicate type="IN">
+				<dep:valueKeyword />
+				<ddt:characterStringLiteral value="M" />
+				<ddt:characterStringLiteral value="F" />
+			</dep:inPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:table name="Hero">
+		<dcl:column name="heroId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="birthDate" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="DATE" />
+		</dcl:column>
+		<dcl:column name="firstName" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER VARYING" length="75" />
+		</dcl:column>
+		<dcl:column name="gender" isNullable="true" isIdentity="false">
+			<dcl:domainRef name="Gender" />
+		</dcl:column>
+		<dcl:column name="lastName" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER VARYING" length="75" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="Hero_PK" isPrimary="true">
+			<dcl:columnRef name="heroId" />
+		</dcl:uniquenessConstraint>
+	</dcl:table>
+	<dcl:table name="HeroIsDuplicateOfHero">
+		<dcl:column name="heroId1" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="heroId2" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="duplicateInfo" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
+		</dcl:column>
+		<dcl:column name="uploadDate" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="DATETIME" />
+		</dcl:column>
+		<dcl:column name="fileDescription" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="HeroIsDuplicateOfHero_PK" isPrimary="true">
+			<dcl:columnRef name="heroId1" />
+			<dcl:columnRef name="heroId2" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="HeroIsDuplicateOfHero_FK1" targetTable="Hero">
+			<dcl:columnRef sourceName="heroId1" targetName="heroId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="HeroIsDuplicateOfHero_FK2" targetTable="Hero">
+			<dcl:columnRef sourceName="heroId2" targetName="heroId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+</dcl:schema>

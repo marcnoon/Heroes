@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  heroapi:
+    image: ${DOCKER_REGISTRY-}heroapi
+    build:
+      context: .
+      dockerfile: HeroApi\Dockerfile

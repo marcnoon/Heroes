@@ -3,3 +3,9 @@
 ################################################################################
 
 /bin/Release
+/.vs/HeroApi
+/HeroApi/bin
+/HeroApi/obj
+/obj
+/Orm/bin
+/Orm/obj

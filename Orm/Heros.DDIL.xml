@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dil:root xmlns:dil="http://schemas.orm.net/DIL/DIL" xmlns:dcl="http://schemas.orm.net/DIL/DCIL" xmlns:ddt="http://schemas.orm.net/DIL/DILDT" xmlns:dep="http://schemas.orm.net/DIL/DILEP" xmlns:dms="http://schemas.orm.net/DIL/DILMS" xmlns:dml="http://schemas.orm.net/DIL/DMIL" xmlns:ddl="http://schemas.orm.net/DIL/DDIL">
+	<dms:startTransactionStatement isolationLevel="SERIALIZABLE" accessMode="READ WRITE" />
+	<ddl:schemaDefinition schemaName="Heros" defaultCharacterSet="UTF8" />
+	<dms:setSchemaStatement>
+		<ddt:characterStringLiteral value="HEROS" />
+	</dms:setSchemaStatement>
+	<ddl:domainDefinition name="Gender" schema="Heros">
+		<ddt:characterString type="CHARACTER" length="1" />
+		<ddl:domainConstraintDefinition name="ValueTypeValueConstraint1">
+			<ddl:checkConstraintDefinition>
+				<dep:inPredicate type="IN">
+					<dep:valueKeyword />
+					<ddt:characterStringLiteral value="M" />
+					<ddt:characterStringLiteral value="F" />
+				</dep:inPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:tableDefinition name="Hero" schema="Heros">
+		<ddl:columnDefinition name="heroId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="birthDate">
+			<ddt:date type="DATE" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="firstName">
+			<ddt:characterString type="CHARACTER VARYING" length="75" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="gender">
+			<ddt:domain name="Gender" schema="Heros" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="lastName">
+			<ddt:characterString type="CHARACTER VARYING" length="75" />
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="Hero_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="heroId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="HeroIsDuplicateOfHero" schema="Heros">
+		<ddl:columnDefinition name="heroId1">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="heroId2">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="duplicateInfo">
+			<ddt:characterString type="CHARACTER VARYING" length="255" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="uploadDate">
+			<ddt:time type="DATETIME" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="fileDescription">
+			<ddt:characterString type="CHARACTER VARYING" length="255" />
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="HeroIsDuplicateOfHero_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="heroId1" />
+				<dep:simpleColumnReference name="heroId2" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:alterTableStatement name="HeroIsDuplicateOfHero" schema="Heros">
+		<ddl:addTableConstraintDefinition name="HeroIsDuplicateOfHero_FK1">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="heroId1" />
+				<ddl:referencesSpecification name="Hero" onDelete="RESTRICT" onUpdate="RESTRICT" schema="Heros">
+					<dep:simpleColumnReference name="heroId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="HeroIsDuplicateOfHero" schema="Heros">
+		<ddl:addTableConstraintDefinition name="HeroIsDuplicateOfHero_FK2">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="heroId2" />
+				<ddl:referencesSpecification name="Hero" onDelete="RESTRICT" onUpdate="RESTRICT" schema="Heros">
+					<dep:simpleColumnReference name="heroId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<dms:commitStatement />
+</dil:root>
