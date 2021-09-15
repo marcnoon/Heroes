@@ -20,6 +20,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore ./HeroApi.sln
     - name: Build
-      run: dotnet build ./HeroApi/HeroApi.csprj --no-restore
+      run: dotnet build ./HeroApi/HeroApi.csproj --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
