@@ -11,5 +11,6 @@
     <WebStackScaffolding_DbContextTypeFullName>HeroApi.Models.HeroApi_dbContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <NameOfLastUsedPublishProfile>C:\heros\HeroCore\HeroApi\HeroApi\Properties\PublishProfiles\HeroApi2 - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
+    <ShowAllFiles>true</ShowAllFiles>
   </PropertyGroup>
 </Project>
