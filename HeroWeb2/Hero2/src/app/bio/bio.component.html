@@ -1,0 +1,12 @@
+<div *ngIf="devs">
+    <div *ngFor="let dev of devs">
+        <div class="dev">
+            <p><span>FirstName</span>{{dev?.firstName}}</p>
+            <p><span>LastName</span>{{dev?.lastName}}</p>
+            <p><span>Favorite Language</span>{{dev?.language}}</p>
+            <p><span>Year Started</span>{{dev?.startYear}}</p>
+        </div>
+    </div>
+</div>
+
+<!-- <a routerLink=""/component-one></a> -->
