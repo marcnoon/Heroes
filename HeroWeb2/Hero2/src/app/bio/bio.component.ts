@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Developer } from '../developer';
 import { CommonModule } from '@angular/common';
+import { DeveloperService } from '../developer.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-bio',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './bio.component.html',
   styleUrls: ['./bio.component.scss']
 })
 export class BioComponent implements OnInit {
-  constructor() {}
-  devs!: Developer[]; // Corrected to an array of Developer
+  constructor(private devService: DeveloperService) {}
+  @Input() devs: Developer[] = []; // Corrected to an array of Developer
 
   ngOnInit() {
     console.log('BioComponent ngOnInit');
@@ -19,12 +21,11 @@ export class BioComponent implements OnInit {
   }
 
   loadDeveloper() {
-    this.devs = [
-      { firstName: "John", lastName: "Doe", language: "Python", startYear: 2015 },
-      { firstName: "Jane", lastName: "Smith", language: "Java", startYear: 2016 },
-      { firstName: "Jim", lastName: "Brown", language: "C#", startYear: 2017 },
-      { firstName: "Jack", lastName: "White", language: "JavaScript", startYear: 2018 }
-    ];
+    this.devs = this.devService.getAllDevelopers();
   }
-   
+
+  selectDeveloper(id: number) {
+    console.log('Selected Developer ID:', id);
+    // Additional logic to handle developer selection can be added here
+  }
 }

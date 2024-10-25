@@ -1,12 +1,7 @@
 <div *ngIf="devs">
     <div *ngFor="let dev of devs">
         <div class="dev">
-            <p><span>FirstName</span>{{dev?.firstName}}</p>
-            <p><span>LastName</span>{{dev?.lastName}}</p>
-            <p><span>Favorite Language</span>{{dev?.language}}</p>
-            <p><span>Year Started</span>{{dev?.startYear}}</p>
+            <a [routerLink]="['/bio', dev.id]" (click)="selectDeveloper(dev.id); $event.preventDefault();">{{dev?.firstName}}</a>
         </div>
     </div>
 </div>
-
-<!-- <a routerLink=""/component-one></a> -->
