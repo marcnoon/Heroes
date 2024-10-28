@@ -1,7 +1,16 @@
-<div *ngIf="devs">
-    <div *ngFor="let dev of devs">
-        <div class="dev">
-            <a [routerLink]="['/bio', dev.id]" (click)="selectDeveloper(dev.id); $event.preventDefault();">{{dev?.firstName}}</a>
-        </div>
-    </div>
-</div>
+<div *ngIf="devs.length > 0">
+    <ul>
+      <li *ngFor="let dev of devs">
+        <!-- Developer name as a clickable link -->
+        <a
+          (click)="selectDeveloper(dev.id)"
+          [title]="getDeveloperDescription(dev)">
+          {{ dev.firstName }} {{ dev.lastName }}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="selectedDeveloperId">
+    <p>Currently Selected Developer ID: {{ selectedDeveloperId }}</p>
+  </div>
