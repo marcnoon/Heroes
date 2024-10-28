@@ -55,6 +55,6 @@ export class BioComponent implements OnInit, OnDestroy {
 
   // Generate a nicely formatted description of the developer for the tooltip
   getDeveloperDescription(dev: Developer): string {
-    return `${dev.firstName} ${dev.lastName}\nLanguage: ${dev.language}\nStart Year: ${dev.startYear}`;
+    return `${dev.firstName} ${dev.lastName}\nLanguage: ${dev.favoriteLanguage}\nStart Year: ${dev.yearStarted}`;
   }
 }

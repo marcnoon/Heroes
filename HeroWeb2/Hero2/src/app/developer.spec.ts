@@ -5,8 +5,8 @@ describe('Developer', () => {
     const developer: Developer = {
       firstName: 'John',
       lastName: 'Doe',
-      language: 'Python',
-      startYear: 2015,
+      favoriteLanguage: 'Python',
+      yearStarted: 2015,
       id: '1'
     };
     expect(developer).toBeTruthy();
