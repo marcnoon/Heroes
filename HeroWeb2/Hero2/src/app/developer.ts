@@ -1,6 +1,6 @@
 // developer.ts
 export interface Developer {
-    id: number;
+    id: string;
     firstName: string;
     lastName: string;
     language: string;

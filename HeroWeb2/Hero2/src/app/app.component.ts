@@ -8,19 +8,20 @@ import { BioDetailsComponent } from './bio-details/bio-details.component';
 import { AppRoutingModule } from './app.routes';
 import { DeveloperService } from './developer.service'; // Import the DeveloperService
 import { Subscription } from 'rxjs'; // Import Subscription to manage observable subscriptions
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, FormsModule, HomeComponent, BioComponent, RouterModule],
+  imports: [RouterOutlet, CommonModule, FormsModule, HomeComponent, BioComponent, RouterModule, HttpClientModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
 
   title = 'Hero2';
-  selectedDeveloperId: number = 1; // Default to the first developer
-  currentDeveloperId: number | null = null;
+  selectedDeveloperId: string = "1"; // Default to the first developer
+  currentDeveloperId: string = "1"; // Default to the first developer
   private subscription!: Subscription;  // Subscription for the DeveloperService observable
 
   constructor(private router: Router, private route: ActivatedRoute, private developerService: DeveloperService) {} // Inject DeveloperService
@@ -28,7 +29,9 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // Subscribe to route parameters for current developer ID
     this.route.params.subscribe(params => {
-      this.currentDeveloperId = params['id'] ? +params['id'] : null;
+      // Note: the + symbol converts the string to a number.  Its a javascript and typescript trick/feature.
+      //this.currentDeveloperId = params['id'] ? +params['id'] : "0"; // Get the current developer ID from the route params
+      this.currentDeveloperId = params['id'] ? params['id'] : "0"; // Get the current developer ID from the route params
       console.log('Current Developer ID from route params:', this.currentDeveloperId);
     });
 
@@ -54,7 +57,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.router.navigate(['/bio']);
   }
 
-  navigateToDeveloperDetails(id: number) {
+  navigateToDeveloperDetails(id: string) {
     this.selectedDeveloperId = id;
     console.log('Navigating to Developer ID:', this.selectedDeveloperId);
     this.router.navigate([`/bio/${id}`]);

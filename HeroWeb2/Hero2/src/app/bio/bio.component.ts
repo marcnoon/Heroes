@@ -4,20 +4,21 @@ import { CommonModule } from '@angular/common';
 import { DeveloperService } from '../developer.service';
 import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-bio',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, HttpClientModule],
   templateUrl: './bio.component.html',
   styleUrls: ['./bio.component.scss']
 })
 export class BioComponent implements OnInit, OnDestroy {
   @Input() devs: Developer[] = [];  // Array of Developer
-  selectedDeveloperId: number | null = null;  // Hold the currently selected developer ID
+  selectedDeveloperId: string | null = null;  // Hold the currently selected developer ID
   private subscription!: Subscription;  // Store the subscription
 
-  constructor(private devService: DeveloperService) {}
+  constructor(private devService: DeveloperService, private httpClient: HttpClient) {}
 
   ngOnInit() {
     console.log('BioComponent ngOnInit');
@@ -41,11 +42,13 @@ export class BioComponent implements OnInit, OnDestroy {
 
   // Load all developers from the service
   loadDeveloper() {
-    this.devs = this.devService.getAllDevelopers();
+    this.devService.getAllDevelopers().subscribe(devs => {
+      this.devs = devs;
+    });
   }
 
   // When a developer is selected, update the selectedDeveloperId in the service
-  selectDeveloper(id: number) {
+  selectDeveloper(id: string) {
     console.log('Selected Developer ID:', id);
     this.devService.setSelectedDeveloperId(id);  // Update the developer ID in the service
   }
