@@ -1,32 +1,38 @@
 import { Injectable } from '@angular/core';
-import { Developer } from './developer';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { Developer } from '../app/developer'; // Ensure this path is correct
 
 @Injectable({
   providedIn: 'root'
 })
 export class DeveloperService {
-  // BehaviorSubject to hold the selected developer ID, defaulting to 1 (the first developer)
-  private selectedDeveloperIdSubject = new BehaviorSubject<string>("1");
-  // Observable for the selected developer ID that components can subscribe to
-  selectedDeveloperId$: Observable<string> = this.selectedDeveloperIdSubject.asObservable();
   private apiUrl = 'https://dev-bios-api-dot-cog01hprmn542jqme4w772bk1dxpr.uc.r.appspot.com/developers/all';  // URL to web api
-  // Constructor
+  private apiAddUrl = 'https://dev-bios-api-dot-cog01hprmn542jqme4w772bk1dxpr.uc.r.appspot.com/developers/add';  // URL to web api
+
+  private selectedDeveloperIdSubject = new BehaviorSubject<string | null>(null); // Initialize with null
+  selectedDeveloperId$ = this.selectedDeveloperIdSubject.asObservable(); // Observable for selected developer ID
+  private dirty = false; // Dirty flag to indicate if the list should be fetched from the API
+
   constructor(private httpClient: HttpClient) {}
 
-  // Method to return all developers
-  getAllDevelopers(): Observable<Developer[]> {
-    // return [
-    //   { id: "1", firstName: "John", lastName: "Doe", language: "Python", startYear: 2015 },
-    //   { id: "2", firstName: "Jane", lastName: "Smith", language: "Java", startYear: 2016 },
-    //   { id: "3", firstName: "Jim", lastName: "Brown", language: "C#", startYear: 2017 },
-    //   { id: "4", firstName: "Jack", lastName: "White", language: "JavaScript", startYear: 2018 }
-    // ];
-    return this.httpClient.get<Developer[]>(this.apiUrl)
+  // Method to get the current selected developer ID (useful for non-observable scenarios)
+  getSelectedDeveloperId(): string | null {
+    return this.selectedDeveloperIdSubject.getValue(); // Get the current value of the selected developer ID
+  }
+
+  // Method to set the selected developer ID
+  setSelectedDeveloperId(id: string | null): void {
+    this.selectedDeveloperIdSubject.next(id);
+  }
+
+  // Method to add a new developer
+  addDeveloper(dev: Developer): Observable<Developer> {
+    return this.httpClient.post<Developer>(this.apiAddUrl, dev)
       .pipe(
-        map((data: Developer[]) => {
+        map((data: Developer) => {
+          this.dirty = true; // Set the dirty flag to true when a new developer is added
           return data;
         }),
         catchError(error => {
@@ -36,24 +42,44 @@ export class DeveloperService {
       );
   }
 
-  // Method to return a single developer by ID
-  // use the find method to search the array of developers for the developer with the matching ID
-
-  getDeveloperById(id: string): Observable<Developer | undefined> {
-    // update to work with the Observable
-    return this.getAllDevelopers().pipe(
-      map((developers: Developer[]) => developers.find(dev => dev.id === id))
-    );
-  }
-
-  // Method to set the selected developer ID
-  setSelectedDeveloperId(id: string) {
-    console.log('DeveloperService: Setting selected developer ID to', id);
-    this.selectedDeveloperIdSubject.next(id);  // Notify all subscribers of the new selected developer ID
-  }
-
-  // Method to get the current selected developer ID (useful for non-observable scenarios)
-  getSelectedDeveloperId(): string {
-    return this.selectedDeveloperIdSubject.getValue();  // Get the current value of the selected developer ID
+  // Method to get all developers
+  getAllDevelopers(): Observable<Developer[]> {
+    if (this.dirty) {
+      // Fetch from API if the dirty flag is true
+      return this.httpClient.get<Developer[]>(`${this.apiUrl}`)
+        .pipe(
+          map((data: Developer[]) => {
+            localStorage.setItem('developers', JSON.stringify(data)); // Update local storage
+            this.dirty = false; // Reset the dirty flag
+            return data;
+          }),
+          catchError(error => {
+            console.error(error);
+            throw error;
+          })
+        );
+    } else {
+      // Fetch from local storage if the dirty flag is false
+      const storedDevelopers = localStorage.getItem('developers');
+      if (storedDevelopers) {
+        return new Observable<Developer[]>(observer => {
+          observer.next(JSON.parse(storedDevelopers));
+          observer.complete();
+        });
+      } else {
+        // Fallback to API if local storage is empty
+        return this.httpClient.get<Developer[]>(`${this.apiUrl}`)
+          .pipe(
+            map((data: Developer[]) => {
+              localStorage.setItem('developers', JSON.stringify(data)); // Update local storage
+              return data;
+            }),
+            catchError(error => {
+              console.error(error);
+              throw error;
+            })
+          );
+      }
+    }
   }
 }

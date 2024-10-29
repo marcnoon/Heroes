@@ -1,14 +1,20 @@
 <div *ngIf="devs.length > 0">
-    <ul>
-      <li *ngFor="let dev of devs">
+    <!-- <ul>
+      <li *ngFor="let dev of devs"> -->
         <!-- Developer name as a clickable link -->
-        <a
+        <!-- <a
           (click)="selectDeveloper(dev.id)"
           [title]="getDeveloperDescription(dev)">
           {{ dev.firstName }} {{ dev.lastName }}
         </a>
       </li>
-    </ul>
+    </ul> -->
+    <div *ngFor="let dev of devs">
+      <div (click)="toggleDeveloperSelection(dev)">
+        {{ dev.firstName }} {{ dev.lastName }}
+        <span *ngIf="isDeveloperSelected(dev)">✔️</span>
+      </div>
+    </div>    
   </div>
 
   <div *ngIf="selectedDeveloperId">

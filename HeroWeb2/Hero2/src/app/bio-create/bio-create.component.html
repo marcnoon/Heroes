@@ -1,0 +1,36 @@
+<h2>Create Developer Bio</h2>
+<form [formGroup]="developerForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="firstName">First Name</label>
+    <input id="firstName" class="form-control" formControlName="firstName">
+    <div *ngIf="developerForm.get('firstName')?.invalid && developerForm.get('firstName')?.touched" class="text-danger">
+      First Name is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="lastName">Last Name</label>
+    <input id="lastName" class="form-control" formControlName="lastName">
+    <div *ngIf="developerForm.get('lastName')?.invalid && developerForm.get('lastName')?.touched" class="text-danger">
+      Last Name is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="favoriteLanguage">Favorite Language</label>
+    <input id="favoriteLanguage" class="form-control" formControlName="favoriteLanguage">
+    <div *ngIf="developerForm.get('favoriteLanguage')?.invalid && developerForm.get('favoriteLanguage')?.touched" class="text-danger">
+      Favorite Language is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="yearStarted">Year Started</label>
+    <input id="yearStarted" type="number" class="form-control" formControlName="yearStarted">
+    <div *ngIf="developerForm.get('yearStarted')?.invalid && developerForm.get('yearStarted')?.touched" class="text-danger">
+      Year Started is required and must be between 1900 and {{ currentYear }}.
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="developerForm.invalid">Create</button>
+</form>
