@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HeroApiTest")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a199927f2866c1f98f8455f6a9e0bb0c48a50236")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+409e5ede5ad175f9c04db6899cc3aad0f7476280")]
 [assembly: System.Reflection.AssemblyProductAttribute("HeroApiTest")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HeroApiTest")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
