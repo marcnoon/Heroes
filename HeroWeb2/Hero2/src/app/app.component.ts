@@ -37,7 +37,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     // Subscribe to the selectedDeveloperId$ observable from DeveloperService
     this.subscription = this.developerService.selectedDeveloperId$.subscribe(id => {
-      this.selectedDeveloperId = id;
+      this.selectedDeveloperId = id || "0"; // Get the selected developer ID from the observable
       console.log('AppComponent: Selected Developer ID:', this.selectedDeveloperId);
     });
   }

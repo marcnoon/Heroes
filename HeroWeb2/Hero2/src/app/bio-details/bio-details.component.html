@@ -1,7 +1,10 @@
 <!-- src/app/bio-details/bio-details.component.html -->
 <h2>Bio Details</h2>
-<p>Developer ID: {{ dev.id }}</p>
-<p>First Name: {{ dev.firstName }}</p>
-<p>Last Name: {{ dev.lastName }}</p>
-<p>Favorite Language: {{ dev.favoriteLanguage }}</p>
-<p>Year Started: {{ dev.yearStarted }}</p>
+<div *ngFor="let dev of selectedDevelopers">
+  <p>Developer ID: {{ dev.id }}</p>
+  <p>First Name: {{ dev.firstName }}</p>
+  <p>Last Name: {{ dev.lastName }}</p>
+  <p>Favorite Language: {{ dev.favoriteLanguage }}</p>
+  <p>Year Started: {{ dev.yearStarted }}</p>
+  <hr>
+</div>
